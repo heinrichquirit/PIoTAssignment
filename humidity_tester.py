@@ -1,16 +1,21 @@
-import sense_hat from SenseHat
+import sys
+from sense_hat import SenseHat
+import sqlite3 as lite
+
 sense = SenseHat()
 
 #record temperature every hour
-float humidity = sense.get_humidity()
-float temperature = sense.get_temperature()
-
-#table structure
-#             humidity  temperature
-# timestamp
+humidity = sense.get_humidity()
+temperature = sense.get_temperature()
 
 #connect to database
-#martin test commit
+con = lite.connect('sensehat.db')
+
+#table structure
+# daterecorded  humidity  temperature
+with con: 
+    cur = con.cursor() 
+    cur.execute("CREATE TABLE IF NOT EXISTS SENSEHAT_data(daterecorded DATETIME, temperature NUMERIC, humidity NUMERIC)")
 
 #log data in a scheduler
     #insert into database
