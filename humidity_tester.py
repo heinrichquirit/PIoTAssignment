@@ -10,6 +10,7 @@ float temperature = sense.get_temperature()
 # timestamp
 
 #connect to database
+#martin test commit
 
 #log data in a scheduler
     #insert into database
