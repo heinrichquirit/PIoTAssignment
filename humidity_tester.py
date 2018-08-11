@@ -1,8 +1,14 @@
 import sys
-from sense_hat import SenseHat
 import sqlite3 as lite
+from crontab import CronTab
+from sense_hat import SenseHat
+from datetime import datetime
 
 sense = SenseHat()
+
+#init cron
+cron = CronTab(user='pi')
+cron.remove_all()
 
 #record temperature every hour
 humidity = sense.get_humidity()
@@ -19,6 +25,14 @@ with con:
 
 #log data in a scheduler
     #insert into database
+time = datetime.now().strftime("%H:%M")
+
+#add new cron job
+job = cron.new(command='record_data.py')
+
+#job settings
+job.minute.every(1)
+cron.write()
 
 #setup cron job to pull data from sense hat at a specific time interval
 
