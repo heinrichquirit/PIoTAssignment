@@ -33,4 +33,4 @@ def index():
 
 if __name__ == "__main__":
 	host = os.popen('hostname -I').read()
-	app.run(host=host, port=80, debug=False)
+	app.run(host=host, port=2222, debug=False)
