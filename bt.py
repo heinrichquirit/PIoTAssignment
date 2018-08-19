@@ -4,10 +4,10 @@ from sense_hat import SenseHat
 
 #find the string "Pi" in device
 def raspberryDevices(pi):
-  if ("MARTIN") or ("Martin") in pi:
+  if ("Raspberry Pi") or ("Pi") in pi:
     print(pi)
   else:
-    print("No devices named pi")
+    print("No Raspberry Pi devices nearby")
 
 #search for nearby bluetooth devices
 def search():
@@ -18,18 +18,20 @@ def search():
     device_name = (bluetooth.lookup_name(x))
     print(devices)
 
-  if ("MARTIN")  or  ("Martin") in device_name:
+  if ("Raspberry Pi") or ("Pi") in device_name:
     print ("")
     sense = SenseHat()
-    temp = round(sense.get_temperature(), 1)
-    sense.show_message("Hello {}! The Temperature is {}".format(device_name, temp), scroll_speed=0.05, text_colour=(0, 0, 255))
+    temp = float(sense.get_temperature())
+    cpu_temp = float(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1e3
+    calibrated_temp = round(cpu_temp - temp, 2)
+    sense.show_message("Hello {}! The Temperature is {}".format(device_name, calibrated_temp), scroll_speed=0.05, text_colour=(0, 0, 255))
 
   print("Here are all the Raspberry Pi Devices")
   print(raspberryDevices(devices))
 
 #main function
-def main():
+def bt_main():
   search()
 
 #execute program
-main()
+bt_main()
