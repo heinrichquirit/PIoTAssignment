@@ -14,11 +14,11 @@ app = Flask(__name__)
 # Maybe create getDatabaseData function
 
 def getData():
-    time = datetime.now().strftime("%H:%M:%S")
-    sense = SenseHat()
-    humidity - round(sense.get_humidity(), 1)
-    temp = round(sense.get_temperature(), 1)
-    return time, humidity, temp
+	time = datetime.now().strftime("%H:%M:%S")
+	sense = SenseHat()
+	humidity = round(sense.get_humidity(), 1)
+	temp = round(sense.get_temperature(), 1)
+	return time, humidity, temp
 
 # main route 
 @app.route("/")
